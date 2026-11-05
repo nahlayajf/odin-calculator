@@ -1,7 +1,6 @@
 let num1;
 let num2;
 let operator;
-let total;
 function addition(number1, number2) {
     return number1 + number2;
 }
@@ -19,24 +18,30 @@ function divide(number1, number2) {
 }
 
 function operation(operator, number1, number2) {
+    let calculationTotal;
     number1 = parseInt(number1)
     number2 = parseInt(number2)
-
+    console.log(operator)
     switch (operator) {
         case "+":
-            total = addition(number1, number2)
+            console.log("cr")
+            calculationTotal = addition(number1, number2)
+            console.log("total", calculationTotal)
             break;
         case "-":
-            total = subtract(number1, number2);
+            calculationTotal = subtract(number1, number2);
             break;
         case "*":
-            total = multiply(number1, number2);
+            calculationTotal = multiply(number1, number2);
             break;
         case "/":
-            total = divide(number1, number2);
+            calculationTotal = divide(number1, number2);
             break;
+        default:
+            calculationTotal = "Error"
     }
-    return total
+    console.log(calculationTotal)
+    return calculationTotal
 }
 
 
@@ -65,7 +70,7 @@ function selectOperator() {
         operation.addEventListener("click", () => {
             operator = operation.textContent;
             updateDisplay(operator)
-
+            console.log("type", typeof operator)
         })
     })
 }
@@ -80,13 +85,26 @@ function updateDisplay(selection) {
 
 }
 
-addition()
-divide()
-subtract()
-multiply()
+function calculateTotal() {
+    console.log("A")
+    let tt;
+    const total = document.querySelector("#total")
+    total.addEventListener("click", () => {
+        console.log("B")
+        updateDisplay(total.textContent)
+        console.log("C")
+        tt = operation(operator, num1, num2)
+        console.log("tt", tt)
+    })
+
+}
+
+
+
 updateNumbers()
 selectOperator()
-operation(num1, num2, operator)
+calculateTotal()
+
 
 
 
