@@ -24,7 +24,6 @@ function operation(operator, number1, number2) {
     console.log(operator)
     switch (operator) {
         case "+":
-            console.log("cr")
             calculationTotal = addition(number1, number2)
             console.log("total", calculationTotal)
             break;
@@ -40,7 +39,7 @@ function operation(operator, number1, number2) {
         default:
             calculationTotal = "Error"
     }
-    console.log(calculationTotal)
+
     return calculationTotal
 }
 
@@ -70,7 +69,7 @@ function selectOperator() {
         operation.addEventListener("click", () => {
             operator = operation.textContent;
             updateDisplay(operator)
-            console.log("type", typeof operator)
+
         })
     })
 }
@@ -86,16 +85,14 @@ function updateDisplay(selection) {
 }
 
 function calculateTotal() {
-    console.log("A")
-    let tt;
-    const total = document.querySelector("#total")
-    total.addEventListener("click", () => {
-        console.log("B")
-        updateDisplay(total.textContent)
-        console.log("C")
-        tt = operation(operator, num1, num2)
-        console.log("tt", tt)
+    const equalSign = document.querySelector("#total")
+    equalSign.addEventListener("click", () => {
+        updateDisplay(equalSign.textContent)
+        total = operation(operator, num1, num2)
+        updateDisplay(total)
+        num1 = total
     })
+
 
 }
 
