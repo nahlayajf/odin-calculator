@@ -14,6 +14,7 @@ function multiply(number1, number2) {
 }
 
 function divide(number1, number2) {
+    if (number2 === 0) return "Error"
     return number1 / number2;
 }
 
@@ -71,6 +72,7 @@ function selectOperator() {
             operator = operation.textContent;
             updateDisplay(operator)
 
+
         })
     })
 }
@@ -98,6 +100,8 @@ function calculateTotal() {
         total = operation(operator, num1, num2)
         updateDisplay(total)
         num1 = total
+        num2 = ""
+        // fix this
     })
 }
 
