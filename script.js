@@ -1,5 +1,5 @@
-let num1;
-let num2;
+let num1 = "";
+let num2 = "";
 let operator;
 function addition(number1, number2) {
     return number1 + number2;
@@ -30,7 +30,7 @@ function operation(operator, number1, number2) {
         case "-":
             calculationTotal = subtract(number1, number2);
             break;
-        case "*":
+        case "x":
             calculationTotal = multiply(number1, number2);
             break;
         case "/":
@@ -50,17 +50,18 @@ function updateNumbers() {
     digits.forEach((digit) => {
         digit.addEventListener("click", () => {
             if (!operator) {
-                num1 = digit.textContent;
-                console.log("THis is num1", num1)
+                num1 += digit.textContent;
+                console.log("This is num1", num1)
                 updateDisplay(num1)
             }
             else {
-                num2 = digit.textContent;
-                console.log("THis is num2", num2)
+                num2 += digit.textContent;
+                console.log("This is num2", num2)
                 updateDisplay(num2)
             }
         })
     })
+
 }
 
 function selectOperator() {
@@ -78,9 +79,15 @@ function selectOperator() {
 
 
 function updateDisplay(selection) {
-    document.querySelector(".display").textContent += selection
+    document.querySelector(".display").textContent = selection
     const clear = document.querySelector("#clear")
-    clear.addEventListener("click", () => document.querySelector(".display").textContent = "")
+    clear.addEventListener("click", () => {
+        document.querySelector(".display").textContent = "";
+        num1 = "";
+        num2 = "";
+        operator = "";
+
+    });
 
 }
 
@@ -92,8 +99,6 @@ function calculateTotal() {
         updateDisplay(total)
         num1 = total
     })
-
-
 }
 
 
