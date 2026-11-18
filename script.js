@@ -1,6 +1,7 @@
 let num1 = "";
 let num2 = "";
 let operator;
+let completedCalculation = false;
 function addition(number1, number2) {
     return number1 + number2;
 }
@@ -15,7 +16,8 @@ function multiply(number1, number2) {
 
 function divide(number1, number2) {
     if (number2 === 0) return "Error"
-    return number1 / number2;
+    let num = number1 / number2
+    return Math.round(num * 1000) / 1000;
 }
 
 function operation(operator, number1, number2) {
@@ -50,7 +52,12 @@ function updateNumbers() {
     const digits = document.querySelectorAll(".digits button");
     digits.forEach((digit) => {
         digit.addEventListener("click", () => {
-            if (!operator) {
+            if (completedCalculation === true) {
+                num1 = digit.textContent
+                updateDisplay(num1)
+                completedCalculation = false
+            }
+            else if (!operator) {
                 num1 += digit.textContent;
                 console.log("This is num1", num1)
                 updateDisplay(num1)
@@ -67,10 +74,23 @@ function updateNumbers() {
 
 function selectOperator() {
     const operators = document.querySelectorAll(".operations button")
-    operators.forEach((operation) => {
-        operation.addEventListener("click", () => {
-            operator = operation.textContent;
-            updateDisplay(operator)
+    operators.forEach((operationButton) => {
+        operationButton.addEventListener("click", () => {
+            completedCalculation = false;
+            if (num1 && num2 && operator) {
+
+                num1 = operation(operator, num1, num2)
+                updateDisplay(num1)
+            }
+            else {
+                operator = operationButton.textContent
+                updateDisplay(operator)
+
+            }
+            operator = operationButton.textContent
+            num2 = "";
+
+
 
 
         })
@@ -101,7 +121,8 @@ function calculateTotal() {
         updateDisplay(total)
         num1 = total
         num2 = ""
-        // fix this
+        operator = ""
+        completedCalculation = true;
     })
 }
 
