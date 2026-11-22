@@ -126,6 +126,13 @@ function calculateTotal() {
     })
 }
 
+function inputDecimal() {
+    const decimal = document.querySelector("#decimal")
+    decimal.addEventListener("click", () => {
+        // I stopped here 
+    })
+}
+
 
 
 updateNumbers()
