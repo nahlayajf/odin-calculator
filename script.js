@@ -2,28 +2,36 @@ let num1 = "";
 let num2 = "";
 let operator;
 let completedCalculation = false;
+
+function round(num) {
+    return Math.round(num * 1000) / 1000;
+}
 function addition(number1, number2) {
-    return number1 + number2;
+    let num = number1 + number2;
+    return round(num);
 }
 
 function subtract(number1, number2) {
-    return number1 - number2;
+    let num = number1 - number2;
+    return round(num);
 }
 
 function multiply(number1, number2) {
-    return number1 * number2;
+    let num = number1 * number2;
+    return round(num);
+
 }
 
 function divide(number1, number2) {
     if (number2 === 0) return "Error"
     let num = number1 / number2
-    return Math.round(num * 1000) / 1000;
+    return round(num);
 }
 
 function operation(operator, number1, number2) {
     let calculationTotal;
-    number1 = parseInt(number1)
-    number2 = parseInt(number2)
+    number1 = parseFloat(number1)
+    number2 = parseFloat(number2)
     console.log(operator)
     switch (operator) {
         case "+":
@@ -52,17 +60,20 @@ function updateNumbers() {
     const digits = document.querySelectorAll(".digits button");
     digits.forEach((digit) => {
         digit.addEventListener("click", () => {
+
             if (completedCalculation === true) {
                 num1 = digit.textContent
                 updateDisplay(num1)
                 completedCalculation = false
             }
             else if (!operator) {
+                if (digit.textContent === "." && num1.includes(".")) return
                 num1 += digit.textContent;
                 console.log("This is num1", num1)
                 updateDisplay(num1)
             }
             else {
+                if (digit.textContent === "." && num2.includes(".")) return
                 num2 += digit.textContent;
                 console.log("This is num2", num2)
                 updateDisplay(num2)
@@ -102,6 +113,7 @@ function selectOperator() {
 
 function updateDisplay(selection) {
     document.querySelector(".display").textContent = selection
+
     const clear = document.querySelector("#clear")
     clear.addEventListener("click", () => {
         document.querySelector(".display").textContent = "";
@@ -123,13 +135,6 @@ function calculateTotal() {
         num2 = ""
         operator = ""
         completedCalculation = true;
-    })
-}
-
-function inputDecimal() {
-    const decimal = document.querySelector("#decimal")
-    decimal.addEventListener("click", () => {
-        // I stopped here 
     })
 }
 
